@@ -8,5 +8,5 @@ mod controllers;
 fn main() {
     dotenv().ok();
     env::vars();
-    prelude::routes::mount();
+    prelude::routes::mount(|rocket| rocket.attach(prelude::db::Connection::fairing()));
 }

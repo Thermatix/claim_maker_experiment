@@ -1,10 +1,11 @@
 use rocket;
 
 
-pub fn mount() {
+pub fn mount(attach: impl Fn(rocket::Rocket) -> rocket::Rocket) {
     use rocket_codegen::routes;
     use crate::controllers::*;
-    rocket::ignite()
+
+    attach(rocket::ignite())
         .mount("/",
                routes![hello_world::greet],
         ).launch();
