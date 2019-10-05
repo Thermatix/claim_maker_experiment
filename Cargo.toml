@@ -1,0 +1,41 @@
+# rustc 1.40.0-nightly (22bc9e1d9 2019-09-30)
+[package]
+name = "claim_maker_experiment"
+version = "0.1.0"
+authors = ["Martin Becker <mbeckerwork@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+# misc
+pico-args 	    = "0.3.0"
+cargo-make  	= "0.22.2"
+dotenv 		    = "0.14.1"
+
+# Serialisation
+serde           = "1.0"
+serde_derive    = "1.0"
+serde_json      = "1.0"
+
+# Database
+diesel 	  	    = "1.4.2"
+
+# Logging
+log             = "0.4"
+log-derive      = "0.3"
+
+# web
+rocket 	  	    = "0.4.2"
+rocket_codegen  = "0.4.2"
+[dependencies.rocket_contrib]
+version = "0.4.*"
+# features = [ "msgpack ", "uuid", "helmet","diesel_postgres_pool"]
+features = [ "msgpack", "uuid", "helmet","diesel_postgres_pool"]
+
+[workspace]
+
+members = [
+    "lib",
+]
