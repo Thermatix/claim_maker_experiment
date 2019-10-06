@@ -4,9 +4,13 @@ use std::env;
 
 mod prelude;
 mod controllers;
+mod schema;
+mod models;
 
 fn main() {
     dotenv().ok();
     env::vars();
-    prelude::routes::mount(|rocket| rocket.attach(prelude::db::Connection::fairing()));
+    prelude::routes::mount(|rocket|
+        rocket.attach(prelude::db::Connection::fairing())
+        );
 }
