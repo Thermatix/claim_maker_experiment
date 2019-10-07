@@ -5,24 +5,24 @@ use diesel::*;
 use serde::{Serialize, Deserialize};
 // use rocket_contrib::databases::diesel::PgConnection;
 mod model;
-use crate::schema;
+use crate::schema::*;
 
 #[derive(Serialize, Deserialize, Queryable, Insertable)]
-#[table_name = "user"]
+#[table_name = "users"]
 pub struct User {
-    pub id: i32,
-    pub addresses: Vec<Addresses>,
-    pub claims: Vec<Claims>,
-    pub identity: Option<Identity>,
+    pub id: u32,
+    // pub addresses: Vec<Addresses>,
+    // pub claims: Vec<Claims>,
+    // pub identity: Option<Identity>,
 
-    created_at: i32,
-    updated_at: i32,
+    created_at: u32,
+    updated_at: u32,
 }
 
 impl model::Base for User {
-    type Model: Self;
-    type Table: user;
-    type Connection: PgConnection;
+    type Model = Self;
+    type Table = users::table;
+    type Connection = PgConnection;
 }
 
 pub enum PropertyType {
@@ -34,14 +34,14 @@ pub enum PropertyType {
 #[derive(Serialize, Deserialize, Queryable, Insertable)]
 #[table_name = "addresses"]
 pub struct Addresses {
-    pub id: i32,
-    pub user_id: i32,
+    pub id: u32,
+    pub user_id: u32,
     pub door_number: Option<i8>,
     pub postcode: Option<String>,
     pub description: Option<PropertyType>,
 
-    created_at: i32,
-    updated_at: i32,
+    created_at: u32,
+    updated_at: u32,
 }
 
 pub enum LossDamageType {
@@ -119,7 +119,7 @@ enum PNumberType {
 #[derive(Serialize, Deserialize, Queryable, Insertable)]
 #[table_name = "phone_numbers"]
 pub struct PhoneNumbers {
-    pub id: i32,
+    pub id: u32,
     pub identity: Option<Identity>,
     pub is_a: Option<PNumberType>,
     pub name: Option<String>,

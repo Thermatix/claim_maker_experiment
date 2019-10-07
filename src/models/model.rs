@@ -3,7 +3,7 @@ use diesel::*;
 
 pub trait Base {
     type Model;
-    type Table;
+    type Table: query_source::Table;
     type Connection;
 
     fn all(connection: &Self::Connection) -> QueryResult<Vec<Self::Model>> {
